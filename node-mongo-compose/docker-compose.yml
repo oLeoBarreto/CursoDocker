@@ -1,0 +1,17 @@
+version: '3.9' #Versao mais atual
+services:
+  db:
+    image: mongo:5.0
+  backend: 
+    image: node:16.13.2
+    volumes:
+      - ./backend:/backend
+    ports:
+      - 3000:3000
+    command: bash -c "cd backend && npm i && node app"
+  frontend:
+    image: nginx:1.21.5
+    volumes:
+      - ./frontend:/usr/share/nginx/html/
+    ports:
+      - 80:80
